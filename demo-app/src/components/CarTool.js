@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { ToolHeader } from './ToolHeader';
+
 export const CarTool = ({ carList: initialCarList }) => {
     const carListItemFn = carListItem =>
         <tr key={carListItem.id} data-id={carListItem.id}>
@@ -43,9 +45,7 @@ export const CarTool = ({ carList: initialCarList }) => {
     };
 
     return <>
-        <header>
-            <h1>Car Tool</h1>
-        </header>
+        <ToolHeader headerText="Car Tool" />
         <table>
             <thead>
                 <tr>

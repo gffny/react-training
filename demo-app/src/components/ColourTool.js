@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+import { ToolHeader } from './ToolHeader';
+import { UnorderedList } from './UnorderedList';
+
 export const ColourTool = ({ colourList: initialColourList }) => {
 
     // useState returns an array, the first value of which returns the value, the second value is a function to update the value
@@ -38,11 +41,12 @@ export const ColourTool = ({ colourList: initialColourList }) => {
     }
 
     return <>
-        <header>
-            <h1>Colour Tool</h1>
-        </header>
+        <ToolHeader headerText="Color Tool" />
         <ul>
             {listItems(colours)}
+        </ul>
+        <ul>
+            <UnorderedList itemList={["a", "b", "c"]} />
         </ul>
         <form>
             <div>
