@@ -4,7 +4,9 @@ import { ColourTool } from './components/ColourTool';
 import { CarTool } from './components/CarTool';
 
 const colourList = [
-    'blue', 'green', 'orange', '#00A1E1 (Plastiq Blue)', 'maroon', 'hot pink'
+    { id: 0, colour: 'Blue', hexcode: '#0000FF' },
+    { id: 1, colour: 'Green', hexcode: '#00FF00' },
+    { id: 2, colour: 'Red', hexcode: '#FF0000' }
 ];
 
 const carList = [

@@ -10,17 +10,27 @@ export const ColourTool = ({ colourList: initialColourList }) => {
 
     const [colours, setColours] = useState(initialColourList.slice());
 
-    const listItems = (itemList, itemFormatterFn) => itemList.map((item, index) =>
-        <li key={index}>{itemFormatterFn(item)}</li>
+    const listItems = (itemList) => itemList.map((item) =>
+        <li key={item.id}>{item.colour} {item.hexcode}</li>
     );
 
     /*  without this function the real DOM cannot update the virtual DOM. 
         The virtual DOM cannot be updated by the real DOM, 
         it can trigger a re-rendering, which is what this function does */
-    const change = (e) => setColourForm(e.target.value);
-
+    const change = (col) => {
+        setColourForm({ ...colourForm, [col.target.id]: col.target.type === 'number' ? Number(col.target.value) : col.target.value });
+    };
     const addColour = () => {
-        setColours(colours.concat(colourForm.colour));
+        setColours(
+            [
+                ...colours,
+                {
+                    id: Math.max(...colours.map(c => c.id), 0) + 1,
+                    colour: colourForm.colour,
+                    hexcode: colourForm.hexcode
+                }
+            ]
+        );
         setColourForm({
             colour: '',
             hexcode: '',
@@ -32,12 +42,14 @@ export const ColourTool = ({ colourList: initialColourList }) => {
             <h1>Colour Tool</h1>
         </header>
         <ul>
-            {listItems(colours, item => item.toUpperCase())}
+            {listItems(colours)}
         </ul>
         <form>
             <div>
                 <label>New Colour </label>
-                <input type="text" id="new-colour-input" value={colourForm.colour} onChange={change} />
+                <input type="text" id="colour" value={colourForm.colour} onChange={change} />
+                <label>Hexcode </label>
+                <input type="text" id="hexcode" value={colourForm.hexcode} onChange={change} />
                 <button type="button" onClick={addColour}>Add</button>
             </div>
         </form>
