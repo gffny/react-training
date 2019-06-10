@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export const CarTool = ({ carList }) => {
+export const CarTool = ({ carList: initialCarList }) => {
     const carListItemFn = carListItem =>
         <tr key={carListItem.id} data-id={carListItem.id}>
             <th>{carListItem.id}</th>
@@ -10,6 +10,38 @@ export const CarTool = ({ carList }) => {
             <td>{carListItem.colour}</td>
             <td>{carListItem.priceDenom} {carListItem.priceVal}</td>
         </tr>;
+
+    const [newCarInput, setNewCarInput] = useState({
+        make: '',
+        model: '',
+        year: '',
+        colour: '',
+        priceDenom: '',
+        priceVal: ''
+    });
+
+    const [carList, setCarList] = useState(initialCarList.slice());
+
+
+    const change = (car) => {
+        setNewCarInput({ ...newCarInput, [car.target.id]: car.target.type === 'number' ? Number(car.target.value) : car.target.value });
+    };
+
+    const addCar = () => {
+        setCarList(
+            [
+                ...carList,
+                {
+                    id: carList.length + 1,
+                    make: newCarInput['make'],
+                    model: newCarInput['model'],
+                    year: newCarInput['year'],
+                    priceVal: newCarInput['priceVal'],
+                    priceDenom: newCarInput['priceDenom']
+                }
+            ]
+        );
+    };
 
     return <>
         <header>
@@ -30,5 +62,64 @@ export const CarTool = ({ carList }) => {
                 {carList.map(car => carListItemFn(car))}
             </tbody>
         </table>
+        <form>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>
+                            <label htmlFor="make">Make </label>
+                        </th>
+                        <td>
+                            <input type="text" id="make" value={newCarInput.make} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label htmlFor="new-car-model">Model </label>
+                        </th>
+                        <td>
+                            <input type="text" id="model" value={newCarInput.model} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label htmlFor="nyear">Year </label>
+                        </th>
+                        <td>
+                            <input type="text" id="year" value={newCarInput.year} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label htmlFor="colour">Colour </label>
+                        </th>
+                        <td>
+                            <input type="text" id="colour" value={newCarInput.colour} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label htmlFor="price">Price (denomination) </label>
+                        </th>
+                        <td>
+                            <input type="text" id="priceDenom" value={newCarInput.priceDenom} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label htmlFor="priceVal">Price (value) </label>
+                        </th>
+                        <td>
+                            <input type="text" id="priceVal" value={newCarInput.priceVal} onChange={change} />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button type="button" onClick={addCar}>Add Car</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
     </>;
 };
