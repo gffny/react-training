@@ -9,7 +9,7 @@ const colourList = [
 
 const carList = [
     {
-        id: 'abcd-1234-efgh-5678',
+        id: 0,
         make: 'VW',
         model: 'Golf',
         year: 1998,
@@ -18,7 +18,7 @@ const carList = [
         priceVal: 4000
     },
     {
-        id: 'bcde-2345-fghi-6789',
+        id: 1,
         make: 'Porche',
         model: 'Carrera',
         year: 2019,

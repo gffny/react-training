@@ -22,7 +22,6 @@ export const CarTool = ({ carList: initialCarList }) => {
 
     const [carList, setCarList] = useState(initialCarList.slice());
 
-
     const change = (car) => {
         setNewCarInput({ ...newCarInput, [car.target.id]: car.target.type === 'number' ? Number(car.target.value) : car.target.value });
     };
@@ -32,7 +31,7 @@ export const CarTool = ({ carList: initialCarList }) => {
             [
                 ...carList,
                 {
-                    id: carList.length + 1,
+                    id: Math.max(...carList.map(c => c.id), 0) + 1,
                     make: newCarInput['make'],
                     model: newCarInput['model'],
                     year: newCarInput['year'],
