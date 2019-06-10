@@ -15,7 +15,7 @@ const carList = [
         year: 1998,
         colour: 'Red',
         priceDenom: 'EUR',
-        priceVal: '4000'
+        priceVal: 4000
     },
     {
         id: 'bcde-2345-fghi-6789',
@@ -24,7 +24,7 @@ const carList = [
         year: 2019,
         colour: 'Black',
         priceDenom: 'USD',
-        priceVal: '90000'
+        priceVal: 90000
     }
 ];
 
