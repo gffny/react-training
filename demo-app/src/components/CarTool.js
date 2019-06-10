@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
 
 import { ToolHeader } from './ToolHeader';
+import { CarTable } from './CarTable';
 
 export const CarTool = ({ carList: initialCarList }) => {
-    const carListItemFn = carListItem =>
-        <tr key={carListItem.id} data-id={carListItem.id}>
-            <th>{carListItem.id}</th>
-            <td>{carListItem.make}</td>
-            <td>{carListItem.model}</td>
-            <td>{carListItem.year}</td>
-            <td>{carListItem.colour}</td>
-            <td>{carListItem.priceDenom} {carListItem.priceVal}</td>
-        </tr>;
 
     const [newCarInput, setNewCarInput] = useState({
         make: '',
@@ -46,21 +38,7 @@ export const CarTool = ({ carList: initialCarList }) => {
 
     return <>
         <ToolHeader headerText="Car Tool" />
-        <table>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>Year</th>
-                    <th>Colour</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {carList.map(car => carListItemFn(car))}
-            </tbody>
-        </table>
+        <CarTable carList={initialCarList} />
         <form>
             <table>
                 <tbody>
@@ -119,6 +97,6 @@ export const CarTool = ({ carList: initialCarList }) => {
                     </tr>
                 </tbody>
             </table>
-        </form>
+        </form >
     </>;
 };
